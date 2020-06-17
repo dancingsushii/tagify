@@ -10,7 +10,7 @@
     "serve-backend": "docker-compose up -d && cd app/backend && systemfd --no-pid -s http::5000 -- cargo watch -x run",
     "build-backend": "cd app/backend && cargo build --release --features 'strict'",
     "clean-frontend": "rm -rf app/dist app/debug_dist",
-    "serve-frontend": "parcel serve -t browser --cache-dir app/.cache -d app/debug_dist app/frontend/*.html",
+    "serve-frontend": "parcel serve -t browser --cache-dir app/.cache -d app/debug_dist app/frontend/*.html --public-url app/debug_dist",
     "build-frontend": "parcel build -d app/dist --no-cache --detailed-report -t browser app/frontend/*.html --public-url app/dist"
   },
   "author": "",
@@ -29,6 +29,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
     "react-waypoint": "^9.0.2"
   },
