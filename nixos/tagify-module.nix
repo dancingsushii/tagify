@@ -1,16 +1,16 @@
-{config, pkgs, lib, ...}:
+{config, pkgs, lib, fetchFromGithub, ...}:
 
 with lib;
 
 let
   callPackage = pkgs.lib.callPackageWith (pkgs);
-  tagify-pkg = callPackage ./tagify-pkg.nix {};
+  tagify-backend = callPackage ./tagify-backend.nix {};
   cfg = config.services.tagify;
   home_path = "/var/tagify";
   mh-run = pkgs.writeScriptBin "mh-run" ''
     #!/bin/sh
-    export CONFIG_FILE="${config_file_path}"
-    ${tagify}/bin/webapp-run "$@"
+    export DIST="${callPackage ./tagify-frontend}/dist"
+    ${tagify-backend}/bin/backend "$@"
   '';
 in
 {
