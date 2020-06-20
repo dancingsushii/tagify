@@ -5,11 +5,13 @@ with lib;
 let
   callPackage = pkgs.lib.callPackageWith (pkgs);
   tagify-backend = callPackage ./tagify-backend.nix {};
+  tagify-frontend = callPackage ./tagify-frontend.nix {};
   cfg = config.services.tagify;
   home_path = "/var/tagify";
   mh-run = pkgs.writeScriptBin "mh-run" ''
     #!/bin/sh
-    export DIST="${callPackage ./tagify-frontend}/dist"
+    export CONFIG_DIR="."
+    export DIST="${tagify-frontend}/dist"
     ${tagify-backend}/bin/backend "$@"
   '';
 in
@@ -44,15 +46,23 @@ in
         type = types.str;
         description = "Base uri of your application";
       };
-
-      config_file = mkOption {
-        type = types.path;
-        description = "Path of config file";
-      };
     };
   };
 
   config = mkIf cfg.enable {
+
+    services.postgresql = {
+        enable = true;
+        ensureDatabases = [ "tagify" ];
+        ensureUsers = [
+          {
+            name = "tagify";
+            ensurePermissions = {
+              "DATABASE tagify" = "ALL PRIVILEGES";
+            };
+          }
+      ];
+    };
 
     users.extraUsers."tagify" = {
       home = home_path;

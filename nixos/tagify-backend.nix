@@ -3,18 +3,17 @@
 rustPlatform.buildRustPackage rec {
 
   pname = "tagify-backend";
-  version = "1.0.0";
+  version = "0.0.1";
 
 
   src = fetchFromGitHub {
     owner = "Luis-Hebendanz";
     repo = pname;
-    rev = "21cea54bdcd6e3f7f06bc76d71160553d1fa563f";
-    sha256 = "0jmpgni2d65k40wj7hx815hvvkwrs33vbdv0i9d0a7cfvfm3y60h";
-
+    rev = "d98a6112b1f803c6de5836c16eec72d952960c45";
+    sha256 = "0h1d2jx5vykhhmggx8srkdy1p3z4qpznczkfm5gan292ixk0bv6x";
   };
 
-  cargoSha256 = "0qkx655d161mih172mj2cqirdsfj95xncnfg7h5l82n3rfajynqd";
+  cargoSha256 = "1xkq159cv5prin3z3p72mp8kjv0k7bcqlm1z6vp6n1vxax06avxr";
 
 
   meta = with stdenv.lib; {
