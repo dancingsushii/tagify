@@ -10,7 +10,7 @@
     "serve-backend": "docker-compose up -d && cd app/backend && systemfd --no-pid -s http::5000 -- cargo watch -x run",
     "build-backend": "cd app/backend && cargo build --release --features 'strict'",
     "clean-frontend": "rm -rf app/dist app/debug_dist",
-    "serve-frontend": "parcel serve -t browser --cache-dir app/.cache -d app/frontend/debug_dist app/frontend/*.html --public-url app/frontend/debug_dist",
+    "serve-frontend": "parcel serve -t browser --cache-dir app/.cache -d app/frontend/debug_dist app/frontend/*.html",
     "build-frontend": "parcel build -d app/frontend/dist --no-cache --detailed-report -t browser app/frontend/*.html --public-url app/frontend/dist"
   },
   "author": "",
