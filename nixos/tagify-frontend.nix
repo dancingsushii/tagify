@@ -8,8 +8,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "Luis-Hebendanz";
     repo = pname;
-    rev = "872672bba06d238f13c2818f081a44acaca6119e";
-    sha256 = "0gif0z7m647g6jgrdim9zvavhcwh4nsp4h9ivlvcv501ma7b8ri1";
+    rev = "11d2f2b28639a11db4a433b973cb9aed67661a06";
+    sha256 = "1h39rls0n2rv52h3abjp3sn1f63dksw5h5i2jrv26kj1jx9kn6gr";
   };
 
   installPhase = ''
