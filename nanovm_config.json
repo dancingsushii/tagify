@@ -1,0 +1,22 @@
+{
+    "Dirs": ["app/frontend/dist"],
+    "Files": [
+        "app/backend/Deploy_Settings.toml",
+        "app/backend/schema.sql"
+    ],
+    "Env": {
+        "DIST":"app/frontend/dist",
+        "CONFIG_DIR":"app/backend"
+    },
+    "RunConfig": {
+        "Ports": [80]
+    },
+    "CloudConfig" :{
+        "ProjectID" :"tagify-281610",
+        "Zone": "europe-west3-a",
+        "BucketName":"tagify-kernel"
+    },
+    "RunConfig" : {
+        "Memory": "2G"
+    }
+}
