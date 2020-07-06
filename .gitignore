@@ -1,6 +1,7 @@
 .envrc
 app/backend/target
 Deploy_Settings.toml
+result
 node_modules
 app/.cache
 app/debug_dist

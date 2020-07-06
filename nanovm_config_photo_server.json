@@ -1,0 +1,18 @@
+{
+    "Files": [
+    ],
+    "Env": {
+    },
+    "RunConfig": {
+        "Ports": [80]
+    },
+    "CloudConfig" :{
+        "ProjectID" :"tagify-281610",
+        "Zone": "europe-west3-a",
+        "BucketName":"tagify-kernel"
+    },
+    "RunConfig" : {
+        "Verbose": true,
+        "Memory": "1G"
+    }
+}

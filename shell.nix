@@ -12,5 +12,8 @@
       export HISTFILE=${toString ./.history}
       export PATH=$PATH:~/.cargo/bin
       export GOPATH=~/go
+      export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/tagify-key.json
+      export GOOGLE_CLOUD_PROJECT=tagify-281610
+      export GOOGLE_CLOUD_ZONE=europe-west3-a
       '';
   }
