@@ -10,4 +10,4 @@ ops image create -a app/backend/target/release/backend -c nanovm_config.json bac
 ops instance create -c nanovm_config.json -i backend-image
 
 ops instance list
-# ops instance logs backend-image-1593293301
+echo  "$ ops instance logs"

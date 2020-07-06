@@ -81,8 +81,8 @@ in
       enable = true;
       recommendedProxySettings = true;
       virtualHosts.${cfg.base_uri} = {
-        forceSSL = cfg.https.enable;
-        enableACME = cfg.https.enable;
+        # forceSSL = cfg.https.enable;
+        # enableACME = cfg.https.enable;
         locations."/" = {
           proxyPass = "http://127.0.0.1:5000";
           proxyWebsockets = true;

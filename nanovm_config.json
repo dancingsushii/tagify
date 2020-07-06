@@ -9,14 +9,16 @@
         "CONFIG_DIR":"app/backend"
     },
     "RunConfig": {
-        "Ports": [80]
+        "Ports": [80, 443]
     },
     "CloudConfig" :{
         "ProjectID" :"tagify-281610",
         "Zone": "europe-west3-a",
         "BucketName":"tagify-kernel"
     },
+    "Debugflags":["debugsyscalls"],
     "RunConfig" : {
-        "Memory": "2G"
+         "Verbose": true,
+        "Memory": "1G"
     }
 }

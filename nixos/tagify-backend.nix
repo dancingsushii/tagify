@@ -1,19 +1,20 @@
-{ pkgs ? import <nixpkgs> {}, stdenv ? pkgs.stdenv, fetchFromGitHub ? pkgs.fetchFromGitHub, rustPlatform ? pkgs.rustPlatform }:
+{ pkgs ? import <nixpkgs> {}, stdenv ? pkgs.stdenv, fetchFromGitHub ? pkgs.fetchFromGitHub, rustPlatform ? pkgs.rustPlatform, openssl ? pkgs.openssl, pkg-config ? pkgs.pkg-config }:
 
 rustPlatform.buildRustPackage rec {
 
   pname = "tagify-backend";
   version = "0.0.1";
 
+  buildInputs = [openssl pkg-config ];
 
   src = fetchFromGitHub {
     owner = "Luis-Hebendanz";
     repo = pname;
-    rev = "ef730098190c7cbcb82cf3291274f356873e4c50";
-    sha256 = "0ss0h5kiirmnc5jkak631cq414xyylzzmih71zd18jiqlsgg8gc8";
+    rev = "7008fa66ca10d7f7ba0ad08f5e90f83f3395bf03";
+    sha256 = "1s3csknl0kxcrpcm643lf3aix9xl7vn9g4a1s4zd84vagill3vcd";
   };
 
-  cargoSha256 = "1xkq159cv5prin3z3p72mp8kjv0k7bcqlm1z6vp6n1vxax06avxr";
+  cargoSha256 = "0smm8gr36xx0cjknwwh5xfa2a86339k6wgx184rvz1g2gj28s4vl";
 
 
   meta = with stdenv.lib; {

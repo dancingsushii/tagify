@@ -4,3 +4,6 @@
 [submodule "app/backend"]
 	path = app/backend
 	url = git@github.com:Luis-Hebendanz/tagify-backend.git
+[submodule "app/go_photos_server"]
+	path = app/go_photos_server
+	url = git@github.com:Lorakus/go_photos_server.git
