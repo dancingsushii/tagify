@@ -6,6 +6,9 @@
       openssl
       go
       postgresql
+      glibc.static
+      glibc_multi.out
+      wrk
       rustup
     ];
     shellHook = ''

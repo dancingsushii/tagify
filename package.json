@@ -28,6 +28,7 @@
     "react-admin": "^3.6.2",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
+    "react-loading-skeleton": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-waypoint": "^9.0.2"
   },
