@@ -99,8 +99,8 @@ ssh "$HOST" << EOF
     # Copy files to tagify user
     install -o $T_USER -g $T_USER -mu=wx app/backend/target/release/backend /home/$T_USER
     install -o $T_USER -g $T_USER -mu=rw app/backend/$SETTINGS_FILE /home/$T_USER
-    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$CERTS_DIR/* /home/$T_USER/$CERTS_DIR
-    install -o $T_USER -g $T_USER -mu=rwx -D $FRONTEND_DIST/* /home/$T_USER/$FRONTEND_DIST
+    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$CERTS_DIR/* -t /home/$T_USER/$CERTS_DIR
+    install -o $T_USER -g $T_USER -mu=rwx -D app/frontend/$FRONTEND_DIST/* -t /home/$T_USER/$FRONTEND_DIST
     install -o $T_USER -g $T_USER -mu=r app/backend/schema.sql /home/$T_USER
 
     # Enable port binding below 1024
