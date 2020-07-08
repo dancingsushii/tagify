@@ -74,6 +74,7 @@ Requires=network.target
 User=$T_USER
 Environment="DIST=dist"
 Environment="CONFIG_DIR=."
+LimitNOFILE=900000
 WorkingDirectory=/home/$T_USER
 ExecStart=/home/$T_USER/backend
 
@@ -120,7 +121,7 @@ ssh "$HOST" << EOF
     # systemctl enable tagify.service
 
     # Start service
-    systemctl start tagify.service
+    systemctl restart tagify.service
 
     sleep 1
     systemctl status tagify.service
