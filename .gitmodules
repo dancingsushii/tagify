@@ -7,3 +7,6 @@
 [submodule "app/go_photos_server"]
 	path = app/go_photos_server
 	url = git@github.com:Lorakus/go_photos_server.git
+[submodule "app/backend_mock_data"]
+	path = app/backend_mock_data
+	url = https://github.com/tuilagio/tagify_backend_testing.git
