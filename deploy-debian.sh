@@ -69,6 +69,7 @@ read -d '' SERVICE_FILE << EOF || true
 Description=Tagify Daemon
 After=network.target
 Requires=network.target
+StartLimitBurst=6
 
 [Service]
 User=$T_USER
@@ -77,12 +78,12 @@ Environment="CONFIG_DIR=."
 LimitNOFILE=900000
 WorkingDirectory=/home/$T_USER
 ExecStart=/home/$T_USER/backend
+RestartSec=10
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
 EOF
-# RestartSec=10
-# Restart=on-abnormal
 
 # Copy over files to tagify user
 ssh "$HOST" << EOF

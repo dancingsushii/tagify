@@ -8,6 +8,7 @@
       postgresql
       wrk
       rustup
+      openssl
     ];
     shellHook = ''
       export HISTFILE=${toString ./.history}
