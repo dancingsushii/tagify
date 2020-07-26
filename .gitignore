@@ -1,4 +1,5 @@
 .envrc
+oauth_key.txt
 app/backend/target
 Deploy_Settings.toml
 result
