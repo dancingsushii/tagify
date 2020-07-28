@@ -1,3 +1,20 @@
+## Deployment
+To deploy the tagify project execute:
+```
+ $ git clone --recurse-submodules git@github.com:Luis-Hebendanz/tagify.git
+```
+Make sure you have a google postgres database available that has a private network connection to your compute engine debian 10 instance.
+The debian 10 instance should have a static ipv4 and a domain pointing to it.
+All these variable should be set in the `app/backend/Deploy_Settings.yml` when deploying.
+The debian 10 instance should have at least 2 cores and 7GB of ram and port 80, 443 should be allowed in the firewall.
+In `app/backend/credential/gg-storage.json` should lie a symlink to an authorized google key file to be able to access the google storage api and issue new oauth keys.
+Then deploy the website with:
+```
+$ ./deploy-debian username@ip
+```
+Make sure that the username has passwordless `sudo` access.
+
+
 
 ## Fork this repository and all submodules
 Make sure that your ssh key is added to your github account.
