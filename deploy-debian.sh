@@ -8,16 +8,16 @@ HOST="${1:-gtag}"
 TAGIFY_PWD="tagify"
 T_USER="tagify"
 SETTINGS_FILE="Deploy_Settings.toml"
+GG_CREDS_FILE="credential/gg-storage.json"
 FRONTEND_DIST="dist"
-CERTS_DIR="deploy_certs"
 
 if [ ! -f "app/backend/$SETTINGS_FILE" ]; then
     echo "ERROR: Could find settings file: app/backend/$SETTINGS_FILE"
     exit 1
 fi
 
-if [ ! -d "app/backend/$CERTS_DIR" ]; then
-    echo "ERROR: Could not find cert dir: app/backend/$CERTS_DIR"
+if [ ! -f "app/backend/$GG_CREDS_FILE" ]; then
+    echo "ERROR: Could not find google credential file: app/backend/$GG_CREDS_FILE"
     exit 1
 fi
 
@@ -41,7 +41,7 @@ ssh "$HOST" << EOF
 EOF
 
 # Copy over backend source
-rsync -R --delete --inplace -Pav -e "ssh -i $HOME/.ssh/id_rsa -F $HOME/.ssh/config"\
+rsync --copy-links -R --delete --inplace -Pav -e "ssh -i $HOME/.ssh/id_rsa -F $HOME/.ssh/config"\
     --dirs "./app/backend" \
     --exclude .git \
     --exclude certs \
@@ -50,7 +50,6 @@ rsync -R --delete --inplace -Pav -e "ssh -i $HOME/.ssh/id_rsa -F $HOME/.ssh/conf
     --exclude reference \
     --exclude Cargo.lock \
     "$HOST":~/
-
 # Copy over frontend dist folder
 rsync -R --delete --inplace -Pav -e "ssh -i $HOME/.ssh/id_rsa -F $HOME/.ssh/config"\
     --dirs "app/frontend/$FRONTEND_DIST" \
@@ -101,7 +100,8 @@ ssh "$HOST" << EOF
     # Copy files to tagify user
     install -o $T_USER -g $T_USER -mu=wx app/backend/target/release/backend /home/$T_USER
     install -o $T_USER -g $T_USER -mu=rw app/backend/$SETTINGS_FILE /home/$T_USER
-    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$CERTS_DIR/* -t /home/$T_USER/$CERTS_DIR
+    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$GG_CREDS_FILE -t /home/$T_USER/$GG_CREDS_FILE
+    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/credential/gen_token -t /home/$T_USER/credential/gen_token
     install -o $T_USER -g $T_USER -mu=rwx -D app/frontend/$FRONTEND_DIST/* -t /home/$T_USER/$FRONTEND_DIST
     install -o $T_USER -g $T_USER -mu=r app/backend/schema.sql /home/$T_USER
 
@@ -109,8 +109,8 @@ ssh "$HOST" << EOF
     setcap 'cap_net_bind_service=+ep' /home/$T_USER/backend
 
     # Delete secrets on current user
-    # rm app/backend/$SETTINGS_FILE
-    # rm -r app/backend/$CERTS_DIR
+    rm app/backend/$SETTINGS_FILE
+    #rm -r app/backend/credential
 
     # Deploy systemd service file
     echo "$SERVICE_FILE" > /lib/systemd/system/tagify.service
