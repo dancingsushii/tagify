@@ -100,10 +100,13 @@ ssh "$HOST" << EOF
     # Copy files to tagify user
     install -o $T_USER -g $T_USER -mu=wx app/backend/target/release/backend /home/$T_USER
     install -o $T_USER -g $T_USER -mu=rw app/backend/$SETTINGS_FILE /home/$T_USER
-    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$GG_CREDS_FILE -t /home/$T_USER/$GG_CREDS_FILE
-    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/credential/gen_token -t /home/$T_USER/credential/gen_token
+    install -o $T_USER -g $T_USER -mu=rwx -D app/backend/$GG_CREDS_FILE -t /home/$T_USER/credential
     install -o $T_USER -g $T_USER -mu=rwx -D app/frontend/$FRONTEND_DIST/* -t /home/$T_USER/$FRONTEND_DIST
     install -o $T_USER -g $T_USER -mu=r app/backend/schema.sql /home/$T_USER
+
+    # Create gen_token folder
+    mkdir -mu=rwx /home/$T_USER/credential/gen_token
+    chown -R $T_USER:$T_USER /home/$T_USER/credential/gen_token
 
     # Enable port binding below 1024
     setcap 'cap_net_bind_service=+ep' /home/$T_USER/backend
